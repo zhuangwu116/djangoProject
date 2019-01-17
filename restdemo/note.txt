@@ -1,0 +1,13 @@
+1.django中间件
+  -process_request
+  -process_view
+  -process_response
+  -process_exception
+  -process_render_template
+2. 使用中间件
+    - 权限
+    - 用户登录验证
+    - django的csrf是如何实现
+          -process_view 检查视图函数是否被装饰
+          -去请求体或cookie中获取token
+3.
