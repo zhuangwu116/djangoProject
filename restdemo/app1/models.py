@@ -37,8 +37,8 @@ class PricePolicy(models.Model):
 
     # table_name = models.CharField(verbose_name='关联的表名称')
     # object_id = models.CharField(verbose_name='关联的表中的数据行的ID')
-    content_type = models.ForeignKey(ContentType, verbose_name='关联的表名称')
+    content_type = models.ForeignKey(ContentType, verbose_name='关联的表名称',on_delete=models.CASCADE)
     object_id = models.IntegerField(verbose_name='关联的表中的数据行的ID')
-    content_object = Gen
+
 
 
