@@ -28,7 +28,7 @@ SECRET_KEY = '=-928bn29v+0ld4et)7+wedy6lydnrq!53g*)kx1j!39@++m*4'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+AUTH_USER_MODEL = 'users.UserProfile'
 
 # Application definition
 
@@ -40,8 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'app1.apps.App1Config',
+    'DjangoUeditor',
     'users.apps.UsersConfig',
+    'goods.apps.GoodsConfig',
+    'trade.apps.TradeConfig',
+    'user_operation.apps.UserOperationConfig',
+
 ]
 
 
@@ -83,7 +87,10 @@ WSGI_APPLICATION = 'restdemo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+#CREATE DATABASE restdjangodb DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+#create user 'restdjango'@'localhost' identified by '123456';
+#GRANT ALL PRIVILEGES ON restdjangodb.* TO 'restdjango'@'localhost';
+#FLUSH PRIVILEGES;
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
