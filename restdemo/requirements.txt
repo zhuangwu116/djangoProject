@@ -1,7 +1,0 @@
-
-django-filter==2.0.0
-djangorestframework==3.9.1
-Markdown==3.0.1
-
-Pillow==5.4.1
-pytz==2018.9
