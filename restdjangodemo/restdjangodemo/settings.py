@@ -28,7 +28,7 @@ SECRET_KEY = 'g&yd8y^3a1m+f@(1#$_7rpmnssrzce@!h0zdyahpv4oz8m8qk_'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CORS_ORIGIN_ALLOW_ALL = True
 AUTH_USER_MODEL = 'users.UserProfile'
 
 # Application definition
@@ -49,11 +49,13 @@ INSTALLED_APPS = [
     'django_filters',
     'xadmin',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -114,7 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
