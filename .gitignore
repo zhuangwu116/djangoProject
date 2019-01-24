@@ -101,3 +101,4 @@ ENV/
 /staticfile/
 .mypy_cache/
 .idea/
+mxshopvenv/
