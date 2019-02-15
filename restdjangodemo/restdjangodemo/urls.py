@@ -20,6 +20,7 @@ from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
 from goods.views import GoodsListViewSet, CategoryViewSet
 from rest_framework.routers import DefaultRouter
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 router = DefaultRouter()
 
@@ -32,6 +33,8 @@ router.register(r'categorys', CategoryViewSet, base_name='categorys')
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
+    url(r'^login/', obtain_jwt_token),
+    url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
     url(r'docs/', include_docs_urls(title="慕学生鲜")),
