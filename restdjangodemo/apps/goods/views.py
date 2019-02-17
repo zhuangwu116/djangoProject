@@ -11,8 +11,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.throttling import UserRateThrottle
 
 from rest_framework.versioning import URLPathVersioning
-from .models import Goods, GoodsCategory
-from .serializers import GoodsSerializer, CategorySerializer
+from .models import Goods, GoodsCategory, HotSearchWords
+from .serializers import GoodsSerializer, CategorySerializer, HotWordsSerializer
 from .filters import GoodsFilter
 # Create your views here.
 class GoodsPagination(PageNumberPagination):
@@ -41,3 +41,11 @@ class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets
     """
     queryset = GoodsCategory.objects.filter(category_type=1)
     serializer_class = CategorySerializer
+
+
+class HotSearchsViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    获取热搜词列表
+    """
+    queryset = HotSearchWords.objects.all().order_by("-index")
+    serializer_class = HotWordsSerializer
