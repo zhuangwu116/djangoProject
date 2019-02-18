@@ -27,7 +27,7 @@ import xadmin
 
 from users.views import SmsCodeViewset, UserViewset
 from goods.views import GoodsListViewSet, CategoryViewSet, HotSearchsViewset
-from user_operation.views import UserFaviewset
+from user_operation.views import UserFaviewset, LeavingMessageViewset
 
 
 router = DefaultRouter()
@@ -43,6 +43,8 @@ router.register(r'codes', SmsCodeViewset, base_name='codes')
 router.register(r'users', UserViewset, base_name='users')
 
 router.register(r'userfavs', UserFaviewset, base_name='userfavs')
+
+router.register(r'messages', LeavingMessageViewset, base_name='messages')
 # goods_list = GoodsListViewSet.as_view({
 #     'get': 'list',
 # })
