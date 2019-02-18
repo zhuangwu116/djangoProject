@@ -58,7 +58,7 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
     url(r'docs/', include_docs_urls(title="慕学生鲜")),
     url(
-        r'^api/(?P<version>(v1|v2))/',
+        r'^(?P<version>(v1|v2))/',
         include(router.urls),
     )
 ]

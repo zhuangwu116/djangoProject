@@ -1,8 +1,5 @@
-
 import re
 import datetime
-
-
 
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -14,25 +11,38 @@ from .models import VerifyCode
 
 User = get_user_model()
 
+
 class SmsSerializer(serializers.Serializer):
     mobile = serializers.CharField(max_length=11)
-    def validate_mobile(self,mobile):
-        #手机是否注册
+
+    def validate_mobile(self, mobile):
+        # 手机是否注册
         if User.objects.filter(mobile=mobile).count():
             raise serializers.ValidationError("用户已存在")
-        #验证手机是否合法
+        # 验证手机是否合法
         if not re.match(settings.REGEX_MOBILE, mobile):
             raise serializers.ValidationError("手机号码非法")
-        #验证手机发送频率
+        # 验证手机发送频率
         one_mintes_ago = datetime.datetime.now() - datetime.timedelta(hours=0, minutes=1, seconds=0)
         if VerifyCode.objects.filter(add_time__gt=one_mintes_ago, mobile=mobile).count():
             raise serializers.ValidationError("距离上次发送验证时间未超过60秒")
         return mobile
 
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    """
+    用户详情页
+    """
+
+    class Meta:
+        model = User
+        fields = ("name", "gender", "birthday", "email", "mobile")
+
+
 class UserRegSerializer(serializers.ModelSerializer):
     code = serializers.CharField(required=True,
                                  write_only=True,
-                                 label= "验证码",
+                                 label="验证码",
                                  error_messages={
                                      "blank": "请输入验证码",
                                      "required": "请输入验证码",
@@ -51,6 +61,7 @@ class UserRegSerializer(serializers.ModelSerializer):
         label="密码",
         write_only=True,
     )
+
     # def create(self, validated_data):
     #     user = super(UserRegSerializer, self).create(validated_data=validated_data)
     #     user.set_password(validated_data['password'])
@@ -72,7 +83,7 @@ class UserRegSerializer(serializers.ModelSerializer):
         attrs["mobile"] = attrs["username"]
         del attrs["code"]
         return attrs
+
     class Meta:
         model = User
         fields = ("username", "code", "mobile", "password")
-
