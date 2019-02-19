@@ -42,7 +42,26 @@ class ShopCartSerializer(serializers.Serializer):
         instance.save()
         return instance
 
+
+class OrderGoodsSerialzier(serializers.ModelSerializer):
+    goods = GoodsSerializer(many=False)
+
+    class Meta:
+        model = OrderGoods
+        fields = "__all__"
+
+
+class OrderDetailSerializer(serializers.ModelSerializer):
+    goods = OrderGoodsSerialzier(many=True)
+
+    class Meta:
+        model = OrderInfo
+        fields = "__all__"
+
+
+
 class OrderSerializer(serializers.ModelSerializer):
+
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
@@ -51,9 +70,10 @@ class OrderSerializer(serializers.ModelSerializer):
     order_sn = serializers.CharField(read_only=True)
     pay_time = serializers.DateTimeField(read_only=True)
     add_time = serializers.DateTimeField(read_only=True)
-    def generate_order_sn(self):
-        #当前时间user_id+随机数
 
+    def generate_order_sn(self):
+
+        #当前时间user_id+随机数
         random_ins = Random()
         order_sn = "{time_str}-{user_id}-{ranstr}".format(time_str=time.strftime("%Y%m%d%H%M%S"),
                                                           user_id=self.context["request"].user.id,
