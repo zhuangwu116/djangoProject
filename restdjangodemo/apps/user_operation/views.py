@@ -37,6 +37,13 @@ class UserFaviewset(mixins.CreateModelMixin, mixins.ListModelMixin,
             return UserFavSerializer
         return UserFavSerializer
 
+    # def perform_create(self, serializer):
+    #     #收藏数加1
+    #     instance = serializer.save()
+    #     goods = instance.goods
+    #     goods.fav_num += 1
+    #     goods.save()
+
 
 class LeavingMessageViewset(mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
 

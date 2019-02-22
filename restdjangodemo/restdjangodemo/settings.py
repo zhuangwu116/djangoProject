@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'xadmin',
     'rest_framework',
     'corsheaders',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -122,7 +125,23 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '2/minute',
+        'user': '3/minute'
+    }
 }
+
+REST_FRAMEWORK_EXTENSIONS = {
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15
+}
+
+
+
+
 import datetime
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
@@ -137,6 +156,17 @@ REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^17\d{9}$"
 #云片网设置
 APIKEY = ""
 
+
+SOCIAL_AUTH_WEIBO_KEY = 'foobar'
+SOCIAL_AUTH_WEIBO_SECRET = 'bazqux'
+
+SOCIAL_AUTH_WEIXIN_KEY = 'foobar'
+SOCIAL_AUTH_WEIXIN_SECRET = 'bazqux'
+
+SOCIAL_AUTH_QQ_KEY = 'foobar'
+SOCIAL_AUTH_QQ_SECRET = 'bazqux'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index/'
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -151,7 +181,11 @@ USE_L10N = True
 USE_TZ = False
 
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.weibo.WeiboOAuth2',
+    'social_core.backends.weixin.WeixinOAuth2',
+    'social_core.backends.qq.QQOAuth2',
     'users.views.CustomBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 # Static files (CSS, JavaScript, Images)

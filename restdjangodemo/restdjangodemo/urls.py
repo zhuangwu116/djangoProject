@@ -26,7 +26,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 import xadmin
 
 from users.views import SmsCodeViewset, UserViewset
-from goods.views import GoodsListViewSet, CategoryViewSet, HotSearchsViewset
+from goods.views import GoodsListViewSet, CategoryViewSet, HotSearchsViewset, BannerViewset,IndexCategoryViewset
 from user_operation.views import UserFaviewset, LeavingMessageViewset, AddressViewset
 from trade.views import ShoppingCartViewset,OrderViewset
 
@@ -51,6 +51,10 @@ router.register(r'address', AddressViewset, base_name='address')
 router.register(r'shopcarts', ShoppingCartViewset, base_name='shopcarts')
 
 router.register(r'orders', OrderViewset, base_name='orders')
+
+router.register(r'banners', BannerViewset, base_name='banners')
+
+router.register(r'indexgoods', IndexCategoryViewset, base_name='indexgoods')
 # goods_list = GoodsListViewSet.as_view({
 #     'get': 'list',
 # })
@@ -58,7 +62,7 @@ router.register(r'orders', OrderViewset, base_name='orders')
 urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^xadmin/', xadmin.site.urls),
-    url(r'^login/', obtain_jwt_token),
+    url(r'^login/$', obtain_jwt_token),
     # drf自带的token认证模式
     url(r'^api-token-auth/', views.obtain_auth_token),
 
@@ -68,5 +72,6 @@ urlpatterns = [
     url(
         r'^(?P<version>(v1|v2))/',
         include(router.urls),
-    )
+    ),
+    url('', include('social_django.urls', namespace='social'))
 ]
