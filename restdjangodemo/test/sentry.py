@@ -1,9 +1,8 @@
 from raven import Client
 
-client = Client('http://27af5ea23a7e4a4c847fc741aa3d8e2a:cb57686f3fde42b19457816764c49039@zhuangwu116.club:9000/3')
+client = Client('http://a7401ad0ce9944b7ba8dcac4c966c0f8:432c5b1750c2494a94a986bf4bbe7666@127.0.0.1:9000/2')
 
 try:
     1 / 0
 except ZeroDivisionError:
     client.captureException()
-    client.captureMessage('Something went fundamentally wrong')
