@@ -198,3 +198,10 @@ STATICFILES_DIRS = (
 )
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn='http://a7401ad0ce9944b7ba8dcac4c966c0f8:432c5b1750c2494a94a986bf4bbe7666@127.0.0.1:9000/2',
+    integrations=[DjangoIntegration()]
+)
