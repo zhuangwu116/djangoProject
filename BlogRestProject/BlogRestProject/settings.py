@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 
-#CREATE DATABASE vca_db DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
-#create user 'vcaadmin'@'%' identified by 'vcaadmin';
-#GRANT ALL PRIVILEGES ON vca_db.* TO 'vcaadmin'@'%';
+#CREATE DATABASE blogrestdb DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+#create user 'bloguser'@'%' identified by 'bloguser';
+#GRANT ALL PRIVILEGES ON blogrestdb.* TO 'bloguser'@'%';
 #FLUSH PRIVILEGES;
 #ALTER USER 'bloguser'@'%' IDENTIFIED WITH mysql_native_password  BY 'bloguser';
 import os
