@@ -24,11 +24,12 @@ from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 
 
-from blogs.views import BlogsArticleListViewset
+from blogs.views import BlogsArticleListViewset,BlogsCategoryListViewset
 
 router = DefaultRouter()
 
 router.register(r'articles', BlogsArticleListViewset, base_name="articles")
+router.register(r'categorys', BlogsCategoryListViewset, base_name='categorys')
 
 urlpatterns = [
     url(r'^', include(router.urls)),

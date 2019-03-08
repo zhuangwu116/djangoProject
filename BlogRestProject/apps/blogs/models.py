@@ -71,7 +71,7 @@ class BlogsArticle(models.Model):
     class Meta:
         verbose_name = '文章'
         verbose_name_plural = verbose_name
-        ordering = ['-date_publish']
+
 
     def __unicode__(self):
         return self.title
