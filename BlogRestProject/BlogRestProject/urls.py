@@ -26,10 +26,13 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 from blogs.views import BlogsArticleListViewset,BlogsCategoryListViewset
 
+from users.views import UserViewset
+
 router = DefaultRouter()
 
 router.register(r'articles', BlogsArticleListViewset, base_name="articles")
 router.register(r'categorys', BlogsCategoryListViewset, base_name='categorys')
+router.register(r'user', UserViewset, base_name='user')
 
 urlpatterns = [
     url(r'^', include(router.urls)),
