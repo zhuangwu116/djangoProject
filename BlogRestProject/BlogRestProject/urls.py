@@ -24,7 +24,7 @@ from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 
 
-from blogs.views import BlogsArticleListViewset,BlogsCategoryListViewset
+from blogs.views import BlogsArticleListViewset,BlogsCategoryListViewset,BlogsArticleGlobalViewset
 
 from users.views import UserViewset
 
@@ -33,6 +33,7 @@ router = DefaultRouter()
 router.register(r'articles', BlogsArticleListViewset, base_name="articles")
 router.register(r'categorys', BlogsCategoryListViewset, base_name='categorys')
 router.register(r'user', UserViewset, base_name='user')
+router.register(r'commentarticles', BlogsArticleGlobalViewset, base_name='commentarticles')
 
 urlpatterns = [
     url(r'^', include(router.urls)),

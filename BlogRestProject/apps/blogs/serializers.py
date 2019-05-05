@@ -30,7 +30,10 @@ class BlogsArticleSerializer(serializers.ModelSerializer):
         count = obj.blogscomment_set.all().count()
         return count
 
+
+
 class BlogsCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogsComment
         fields = "__all__"
+
